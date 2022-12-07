@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 const { Title } = Typography;
 
 function LoginPage(props) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
 
@@ -51,7 +52,7 @@ function LoginPage(props) {
                 } else {
                   localStorage.removeItem('rememberMe');
                 }
-                props.history.push("/");
+                navigate("/");
               } else {
                 setFormErrorMessage('Check out your Account or Password again')
               }
@@ -71,12 +72,12 @@ function LoginPage(props) {
           values,
           touched,
           errors,
-          dirty,
+          // dirty,
           isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
+          // handleReset,
         } = props;
         return (
           <div className="app">
@@ -144,6 +145,6 @@ function LoginPage(props) {
   );
 };
 
-export default withRouter(LoginPage);
+export default LoginPage
 
 
